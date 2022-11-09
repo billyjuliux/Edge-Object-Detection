@@ -1,14 +1,14 @@
 % Variables for testing
-clc
-clear all
-impath = "E:\OneDrive - Institut Teknologi Bandung\AI Engineer\Edge-Object-Detection\images";
-img = imread(append(impath, "\avocado.jpg"));
-sigma = 1.5;
-T = 0.09;
-op = 'Laplacian Normal';
-[edges, edgeImage] = lpcGetEdgeImage1(img, op, T, sigma);
+% clc
+% clear all
+% impath = "E:\OneDrive - Institut Teknologi Bandung\AI Engineer\Edge-Object-Detection\images";
+% img = imread(append(impath, "\avocado.jpg"));
+% sigma = 1.5;
+% T = 0.09;
+% op = 'Laplacian Normal';
+% [edges, edgeImage] = lpcGetEdgeImage1(img, op, T, sigma);
 
-function [edges, edgeImage] = lpcGetEdgeImage1(img, op, T, sigma)
+function [edges, edgeImage] = lpcGetEdgeImage(img, op, T, sigma)
 %{
         Performs an edge detection process onto img and returns the result
 
