@@ -9,17 +9,24 @@ function res = getSegmentedImage(img, edge)
             res     : Segmented Image
     %}
 
+    % Dilate the image
     mask = imdilate(edge, [ ...
-        strel('line', 3, 0), ...
-        strel('line', 3, 45), ...
-        strel('line', 3, 90), ...
-        strel('line', 3, 135), ...
-        strel('line', 3, 180), ...
+        strel('line', 2, 0), ...
+        strel('line', 2, 90), ...
     ]);
 
-    mask = imfill(mask, 26, "holes");
+    % Fill the area closed by edges
+    mask = imfill(mask, "holes");
 
-    mask = bwareaopen(mask, 2000);
+    % Remove border objects
+    mask = imclearborder(mask, 4);
+
+    % Smoothen the objects, twice
+    mask = imerode(mask, strel('diamond', 1));
+    mask = imerode(mask, strel('diamond', 1));
+
+    % Removes all connected objects with less than 1000 pixels
+    mask = bwareaopen(mask, 1000);
 
     res = img .* uint8(mask);
 end
